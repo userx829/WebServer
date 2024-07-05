@@ -20,7 +20,7 @@ const port = process.env.PORT || 5000; // Use PORT from environment variables or
 const allowedOrigins = [
   "http://localhost:3000",
   "http://192.168.1.5:3000",
-  "https://win69.onrender.com",
+  "https://win69.vercel.app/",
  ];
 
 app.use(cors({
