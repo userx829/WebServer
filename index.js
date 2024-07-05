@@ -1,5 +1,6 @@
 const express = require("express");
 const http = require("http");
+const path = require("path");
 const connectToMongo = require("./db");
 require("dotenv").config(); // Ensure you load environment variables at the top
 const cors = require("cors");
@@ -19,9 +20,8 @@ const port = process.env.PORT || 5000; // Use PORT from environment variables or
 const allowedOrigins = [
   "http://localhost:3000",
   "http://192.168.1.5:3000",
-  "https://client-r8jh.onrender.com",
-  "https://frontend-pfmk.onrender.com" // Add the new frontend URL here
-];
+  "https://win69.onrender.com/",
+ ];
 
 app.use(cors({
   origin: function (origin, callback) {
@@ -37,12 +37,25 @@ app.use(cors({
 
 app.use(express.json());
 
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 // Mount routers
 app.use("/api", userRouter);
 app.use("/api", pointsRouter);
 app.use('/api', betRecordsRouter);
 app.use('/api', gameLogicRouter);
 app.use('/api', boxgameLogicRouter); // Mount the game logic router
+
+// Serve the manifest.json file
+app.get('/manifest.json', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build/manifest.json'));
+});
+
+// The "catchall" handler: for any request that doesn't match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build/index.html'));
+});
 
 // Create HTTP server
 const server = http.createServer(app);
