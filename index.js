@@ -21,6 +21,7 @@ const allowedOrigins = [
   "http://localhost:3000",
   "http://192.168.1.5:3000",
   "https://win69.vercel.app/",
+  "https://win69.onrender.com/",
  ];
 
 app.use(cors({
