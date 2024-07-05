@@ -20,8 +20,13 @@ const port = process.env.PORT || 5000; // Use PORT from environment variables or
 const allowedOrigins = [
   "http://localhost:3000",
   "http://192.168.1.5:3000",
+<<<<<<< HEAD
   "https://win69.onrender.com/",
  ];
+=======
+ "https://win69.onrender.com" // Add the new frontend URL here
+];
+>>>>>>> ebb95618f520db3846c1723ff203f8f1930d71da
 
 app.use(cors({
   origin: function (origin, callback) {
